@@ -429,8 +429,10 @@ public class processImage {
                 newY = (int)((int)(Math.floor((image.getHeight())/2))-j);
                 newY = (int)((sen*newX) + newY);
                 newX = (int)((newX) - tan*(newY))+((d/2));
-                newY = (int)(-newY)+((d/2));  
-                result.setRGB(newX,newY,pixel);              
+                newY = (int)(-newY)+((d/2)); 
+                try { 
+                    result.setRGB(newX,newY,pixel);              
+                } catch (Exception e) {}
             }         
         }
         return result;         
