@@ -85,7 +85,6 @@ public class Interface extends javax.swing.JFrame {
 
         custom.setTitle("Kernel Personalizado");
         custom.setMinimumSize(new java.awt.Dimension(400, 300));
-        custom.setPreferredSize(new java.awt.Dimension(400, 330));
 
         jLabel4.setText("Divisor");
 
@@ -353,8 +352,10 @@ public class Interface extends javax.swing.JFrame {
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         int saveValue = browsedFile.showSaveDialog(null);
-        BufferedImage aux = processImage.toBufferedImage(bitmapImage);
-        Image image = bitmapImage.getScaledInstance(aux.getWidth(), aux.getHeight(), Image.SCALE_SMOOTH);
+        BufferedImage aux = null;
+        if (!rotated) aux = processImage.toBufferedImage(bitmapImage);
+        else aux = processImage.rotate(processImage.toBufferedImage(imgAux), degrees, d);
+        Image image = aux.getScaledInstance(aux.getWidth(), aux.getHeight(), Image.SCALE_SMOOTH);
         BufferedImage buffered = new BufferedImage(aux.getWidth(), aux.getHeight(), BufferedImage.TYPE_INT_RGB);
         buffered.getGraphics().drawImage(image, 0, 0 , null);
         if (saveValue == JFileChooser.APPROVE_OPTION) {
